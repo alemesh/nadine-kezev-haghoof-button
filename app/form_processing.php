@@ -17,8 +17,8 @@ $redirectURL = $_SERVER['SERVER_NAME'];
 $ufname = $_POST['name'];
 $uphone = $_POST['tel'];
 $umail = $_POST['email'];
-$sources = $_POST['sources-3'];
-$description = $_POST['description'];
+$sources = $_POST['sources'];
+//$description = $_POST['description'];
 
 
 
@@ -28,7 +28,6 @@ $description = $_POST['description'];
 $messageText =	'Name: '.$ufname."\n".
     'Phone: '.$uphone."\n".
     'Email: '.$umail."\n".
-    'Description: '.$description."\n".
     'Branch: '.$sources."\n";
 
 
@@ -39,7 +38,6 @@ $messageHeaders = "From: " . $senderName . " <" . $senderEmail . ">\r\n"
     . "MIME-Version: 1.0" . "\r\n"
     . "Content-type: text/plain; charset=UTF-8" . "\r\n";
 
-//if (preg_match('/^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,4}$/',$targetEmail,$matches))
 foreach ($targetEmail as $val){
     mail($val, $messageSubject, $messageText, $messageHeaders);
 }
@@ -50,7 +48,7 @@ foreach ($targetEmail as $val){
 $today = date("F j, Y, g:i a");
 
 $file = 'sample.csv';
-$tofile = "$ufname;$uphone;$umail;$sources;$description;$today\n";
+$tofile = "$ufname;$uphone;$umail;$sources;$today\n";
 $bom = "\xEF\xBB\xBF";
 @file_put_contents($file, $bom . $tofile . file_get_contents($file));
 
